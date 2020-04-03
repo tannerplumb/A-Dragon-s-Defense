@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RedFireball : MonoBehaviour
+public class PurpleFireball : MonoBehaviour
 {
-    public float MoveSpeed = 1f;
-    public int LivesToRemove = 1;
+    public float MoveSpeed = 3f;
+    public float SlowedSpeed = 2f;
+    public static int LivesToRemove = 2000;
+
     public GameObject FireballToSpawn;
+    [System.NonSerialized] public int NumToSpawn = 10;
+    [System.NonSerialized] public int Health = 75;
 
     public int curPos = 0;
 
@@ -19,6 +23,11 @@ public class RedFireball : MonoBehaviour
         else
         {
             HandleMovement();
+        }
+
+        if (Health <= 0)
+        {
+            KillThis();
         }
     }
 
@@ -42,6 +51,18 @@ public class RedFireball : MonoBehaviour
             Game.StillSpawning = false;
             Game.GameOver = true;
             Game.HandleGameOver();
+        }
+
+        Destroy(gameObject);
+    }
+
+    private void KillThis()
+    {
+        for (int i = 0; i < NumToSpawn; i++)
+        {
+            GameObject fireball = Instantiate(FireballToSpawn);
+            fireball.transform.position = transform.position;
+            fireball.GetComponent<WhiteFireball>().curPos = curPos;
         }
 
         Destroy(gameObject);

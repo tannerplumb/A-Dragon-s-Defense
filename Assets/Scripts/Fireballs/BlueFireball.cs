@@ -2,26 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Element
+public class BlueFireball : MonoBehaviour
 {
-    FIRE,
-    ICE
-}
+    public float MoveSpeed = 2f;
+    public int LivesToRemove = 3;
+    public GameObject FireballToSpawn;
 
-public class Fireball : MonoBehaviour
-{
-    public float MoveSpeed { get; set; }
-    public int LivesToRemove { get; set; }
-    public Element Type { get; set; }
-
-    private int curPos = 0;
+    public int curPos = 0;
 
     private void Update()
     {
         if (curPos >= Game.EndPositionIndex)
         {
             DestroyThis();
-        } 
+        }
         else
         {
             HandleMovement();
@@ -37,7 +31,7 @@ public class Fireball : MonoBehaviour
             curPos++;
         }
     }
-   
+
     private void DestroyThis()
     {
         Game.Lives -= LivesToRemove;
@@ -49,6 +43,7 @@ public class Fireball : MonoBehaviour
             Game.GameOver = true;
             Game.HandleGameOver();
         }
+
         Destroy(gameObject);
     }
 }

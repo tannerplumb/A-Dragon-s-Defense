@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RedFireball : MonoBehaviour
+public class WhiteFireball : MonoBehaviour
 {
-    public float MoveSpeed = 1f;
-    public int LivesToRemove = 1;
+    public float MoveSpeed = 4f;
+    public int LivesToRemove = 5;
     public GameObject FireballToSpawn;
 
     public int curPos = 0;
